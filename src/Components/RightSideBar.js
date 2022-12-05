@@ -17,7 +17,10 @@ function RightSideBar() {
           src="https://media-exp1.licdn.com/dms/image/D4D16AQGxvfuC89PGJQ/profile-displaybackgroundimage-shrink_200_800/0/1667506363389?e=1675900800&v=beta&t=MKI3qMwuzXksfHNyusdRc5TIuVx9al7eF3WNYhTCE24"
           alt="background"
         />
-        <Avatar className="sidebar__avatar" />
+        <Avatar
+          src="https://media-exp1.licdn.com/dms/image/D4D03AQF3faGk7y4ZAA/profile-displayphoto-shrink_100_100/0/1667490640662?e=1675900800&v=beta&t=dj4d2z2-p4H8cybkKvtqBCifyJQgzIdNnH_8OgKcT2s"
+          className="sidebar__avatar"
+        />
         <h2>Usman Farooq</h2>
         <h4>React Js Developer</h4>
       </div>
