@@ -1,0 +1,24 @@
+.navbaricons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  color: gray;
+  cursor: pointer;
+}
+
+.navbaricons:hover {
+  color: #333;
+}
+
+.navbar__icon {
+  object-fit: contain;
+  align-items: center;
+  height: 25px !important;
+  width: 25px !important;
+}
+
+.navbaricons__title {
+  font-size: 12px;
+  font-size: 400;
+}
