@@ -5,11 +5,18 @@ import {
   Image,
   Subscriptions,
 } from "@mui/icons-material";
-import React from "react";
+import React, { useState } from "react";
 import InputOptions from "./InputOptions";
 import "./NewsFeed.css";
+import Post from "./Post";
 
 function NewsFeed() {
+  const [post, setPost] = useState([]);
+
+  function sendPostHandler(e) {
+    e.preventDefault();
+  }
+
   return (
     <div className="feed">
       <div className="feed__InputContainer">
@@ -17,7 +24,9 @@ function NewsFeed() {
           <Create />
           <form>
             <input type="text" />
-            <button type="submit">Send</button>
+            <button type="submit" onClick={sendPostHandler}>
+              Send
+            </button>
           </form>
         </div>
         <div className="feed__InputOption">
@@ -31,6 +40,14 @@ function NewsFeed() {
           />
         </div>
       </div>
+      {post.map((post) => (
+        <Post />
+      ))}
+      <Post
+        name="Usman Farooq"
+        description="description"
+        message="this is body message"
+      />
     </div>
   );
 }
