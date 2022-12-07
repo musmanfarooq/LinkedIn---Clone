@@ -2,10 +2,10 @@
   /* display: flex;
     flex-direction: column; */
   align-items: center;
+  background-color: #f3f2ef;
 }
 
 .appbody {
-  background-color: #f3f2ef;
   display: flex;
+  padding: 0 90px;
 }
-

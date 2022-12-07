@@ -25,6 +25,7 @@
 
 .post__body {
   overflow-wrap: anywhere;
+  margin-left: 10px;
 }
 
 .post__buttons {
