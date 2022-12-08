@@ -4,10 +4,11 @@ import { Navbar } from "./Components/Navbar";
 import RightSideBar from "./Components/RightSideBar";
 import NewsFeed from "./Components/NewsFeed";
 import LoginPage from "./Pages/LoginPage";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 
 function App() {
-  // const user = useSelector(selectUser);
-  const user = null;
+  const user = useSelector(selectUser);
 
   return (
     <div className="app">

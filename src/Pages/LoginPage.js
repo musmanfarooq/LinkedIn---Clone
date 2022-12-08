@@ -1,42 +1,63 @@
-import React, { useRef, useState } from "react";
-import { auth } from "../firebase";
+import React, { useState } from "react";
+import { auth, db } from "../firebase";
 import "./LoginPage.css";
+import firebase from "firebase/compat/app";
+import { useDispatch } from "react-redux";
+import { login } from "../features/userSlice";
 
 const LoginPage = () => {
   const [isRegister, setIsRegister] = useState(false);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [profilepic, setprofilepic] = useState("");
+  const dispatch = useDispatch();
 
   function loginintoApp(e) {
     e.preventDefault();
     auth
-      .signInWithEmailAndPassword(
-        emailRef.current.value,
-        passwordRef.current.value
-      )
-      .then(() => {
-        console.log("login");
+      .signInWithEmailAndPassword(email, password)
+      .then((userAuth) => {
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+            displayName: name,
+            profilepic: profilepic,
+          })
+        );
       })
       .catch((error) => {
         alert(error.message);
       });
+    setpassword("");
+    setemail("");
   }
 
   function register(e) {
     e.preventDefault();
+    if (!name) {
+      return alert("Please Enter your Name");
+    }
     auth
-      .createUserWithEmailAndPassword(
-        emailRef.current.value,
-        passwordRef.current.value
-      )
-      .then((authUser) => {
-        console.log(authUser);
-        console.log("User have Signin");
-        alert("Account Created, Signing you in");
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        db.collection("user").add({
+          name: name,
+          email: email,
+          password: password,
+          photoUrl: profilepic,
+          time: firebase.firestore.FieldValue.serverTimestamp(),
+        });
       })
       .catch((error) => {
         alert(error.message);
       });
+
+    setname("");
+    setpassword("");
+    setemail("");
+    setprofilepic("");
   }
 
   return (
@@ -48,10 +69,30 @@ const LoginPage = () => {
       {isRegister ? (
         <div className="signupcard">
           <form>
-            <input placeholder="Full Name" type="name" />
-            <input placeholder="Profile Pic URL" type="text" />
-            <input placeholder="Email" type="email" ref={emailRef} />
-            <input placeholder="Password" type="password" ref={passwordRef} />
+            <input
+              value={name}
+              onChange={(e) => setname(e.target.value)}
+              placeholder="Full Name (Required)"
+              type="name"
+            />
+            <input
+              value={profilepic}
+              onChange={(e) => setprofilepic(e.target.value)}
+              placeholder="Profile Pic URL"
+              type="text"
+            />
+            <input
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
+              placeholder="Email"
+              type="email"
+            />
+            <input
+              value={password}
+              onChange={(e) => setpassword(e.target.value)}
+              placeholder="Password"
+              type="password"
+            />
             <button type="submit" onClick={register}>
               Register
             </button>
@@ -70,8 +111,18 @@ const LoginPage = () => {
         <div>
           <div className="logincard">
             <form>
-              <input placeholder="Email" type="email" ref={emailRef} />
-              <input placeholder="Password" type="password" ref={passwordRef} />
+              <input
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
+                placeholder="Email"
+                type="email"
+              />
+              <input
+                value={email}
+                onChange={(e) => setpassword(e.target.value)}
+                placeholder="Password"
+                type="password"
+              />
               <button type="submit" onClick={loginintoApp}>
                 Sign in
               </button>
