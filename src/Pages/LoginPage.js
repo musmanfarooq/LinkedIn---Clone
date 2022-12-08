@@ -22,8 +22,6 @@ const LoginPage = () => {
           login({
             email: userAuth.user.email,
             uid: userAuth.user.uid,
-            displayName: name,
-            profilepic: profilepic,
           })
         );
       })
@@ -49,6 +47,8 @@ const LoginPage = () => {
           photoUrl: profilepic,
           time: firebase.firestore.FieldValue.serverTimestamp(),
         });
+      }).then(()=>{
+        return alert("Account Created, You can now Signin")
       })
       .catch((error) => {
         alert(error.message);
