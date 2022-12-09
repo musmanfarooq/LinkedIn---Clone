@@ -42,3 +42,28 @@
   display: flex;
   align-items: center;
 }
+
+.navbar__signout {
+  position: absolute;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 5px;
+  top: 55px;
+  right: 15%;
+  box-shadow: 0px 0px 30px rgba(0, 51, 101, 0.07);
+}
+
+.navbar__dropdown {
+  cursor: pointer;
+}
+
+.navbar__signout p {
+  color: #333;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.3 ease;
+}
+
+.navbar__signout p:hover {
+  border-bottom: 1px solid #333;
+}
