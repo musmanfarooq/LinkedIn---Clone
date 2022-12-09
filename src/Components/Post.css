@@ -32,3 +32,12 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.post__pic {
+  padding: 10px;
+  text-align: center;
+}
+
+.post__pic img {
+  max-width: 500px;
+}

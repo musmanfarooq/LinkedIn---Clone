@@ -22,6 +22,13 @@ function Post({ name, description, message, photoUrl }) {
       <div className="post__body">
         <p>{message}</p>
       </div>
+
+      {photoUrl && (
+        <div className="post__pic">
+          <img src={photoUrl} alt="post"></img>
+        </div>
+      )}
+
       <div className="post__buttons">
         <InputOptions Icon={ThumbUpAltOutlined} title="Like" color="gray" />
         <InputOptions Icon={ChatOutlined} title="Comment" color="gray" />

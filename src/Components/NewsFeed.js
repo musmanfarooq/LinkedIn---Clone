@@ -3,6 +3,7 @@ import {
   Create,
   EventNote,
   Image,
+  Photo,
   Subscriptions,
 } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
@@ -15,6 +16,7 @@ import firebase from "firebase/compat/app";
 function NewsFeed() {
   const [post, setPost] = useState([]);
   const [input, setInput] = useState("");
+  const [picUrl, setPicUrl] = useState("");
 
   useEffect(() => {
     db.collection("posts")
@@ -31,15 +33,19 @@ function NewsFeed() {
 
   function sendPostHandler(e) {
     e.preventDefault();
-    console.log(input);
-    db.collection("posts").add({
-      name: "Usman Farooq",
-      description: "test description",
-      message: input,
-      photoUrl: "",
-      time: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-    setInput("");
+    if (input === "") {
+      alert("Head is Required for the Post");
+    } else {
+      db.collection("posts").add({
+        name: "Usman Farooq",
+        description: "test description",
+        message: input,
+        photoUrl: picUrl,
+        time: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+      setInput("");
+      setPicUrl("");
+    }
   }
 
   return (
@@ -51,7 +57,15 @@ function NewsFeed() {
             <input
               type="text"
               value={input}
+              placeholder="Write your head here (Required)"
               onChange={(e) => setInput(e.target.value)}
+            />
+            <Photo />
+            <input
+              type="text"
+              value={picUrl}
+              placeholder="Add Image or video Link here (Optional)"
+              onChange={(e) => setPicUrl(e.target.value)}
             />
             <button type="submit" onClick={sendPostHandler}>
               Send
